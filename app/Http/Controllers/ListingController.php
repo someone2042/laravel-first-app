@@ -11,8 +11,7 @@ class ListingController extends Controller
 {
     public function index(){
         return view('listings.index',[
-            'listings'=> Listing::filter
-            (request(['tag','search']))->get()
+            'listings'=> Listing::filter(request(['tag','search']))->simplePaginate(4)
         ]);
     }
     public function show(Listing $listing){
@@ -34,6 +33,6 @@ class ListingController extends Controller
             'description'=>'required'
         ]);
         Listing::create($formeFieleds);
-        return redirect('/');
+        return redirect('/')->with('message','Listing created successfully!');
     }
 }
