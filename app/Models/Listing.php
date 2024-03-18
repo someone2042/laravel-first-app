@@ -15,7 +15,14 @@ class Listing extends Model
         if($filters['search'] ??false){
             $query->Where('description','like','%'.request('search').'%')
             ->orWhere('title','like','%'.request('search').'%')
-            ->orWhere('tags','like','%'.request('search').'%');
+            ->orWhere('tags','like','%'.request('search').'%')
+            ->orderByRaw(
+                "CASE 
+                    WHEN title LIKE '%" . request('search') . "%' THEN 1 
+                    WHEN tags LIKE '%" . request('search') . "%' THEN 2 
+                    WHEN description LIKE '%" . request('search') . "%' THEN 3 
+                END"
+            );
         }
     }
 }

@@ -40,20 +40,7 @@
                     </h3>
                     <div class="text-lg space-y-6">
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur
-                            adipisicing elit. Eligendi non reprehenderit
-                            facilis architecto autem quam
-                            necessitatibus, odit quod, repellendus
-                            voluptate cum. Necessitatibus a id tenetur.
-                            Error numquam at modi quaerat.
-                        </p>
-                        <p>
-                            Lorem, ipsum dolor sit amet consectetur
-                            adipisicing elit. Quaerat praesentium eos
-                            consequuntur ex voluptatum necessitatibus
-                            odio quos cupiditate iste similique rem in,
-                            voluptates quod maxime animi veritatis illum
-                            quo sapiente.
+                            {{$listing->description}}
                         </p>
                             <a
                                 href="{{$listing->email}}"

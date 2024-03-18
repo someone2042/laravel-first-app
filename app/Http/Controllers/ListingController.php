@@ -9,7 +9,7 @@ class ListingController extends Controller
 {
     public function index(){
         return view('listings.index',[
-            'listings'=> Listing::latest()->filter
+            'listings'=> Listing::filter
             (request(['tag','search']))->get()
         ]);
     }
