@@ -1,3 +1,6 @@
+@php
+    $tags = explode(',',$listing->tags);
+@endphp
 <x-layout>
     @include('partials._search')
     <a href="/" class="inline-block text-black ml-4 mb-4">
@@ -9,25 +12,18 @@
                 class="flex flex-col items-center justify-center text-center">
                 <img
                     class="w-48 mr-6 mb-6"
-                    src="{{asset('images/no-image.png')}}"
+                    src="{{$listing->logo ? asset('storage/'.$listing->logo):asset('/images/no-image.png')}}"
                     alt=""
                 />
 
                 <h3 class="text-2xl mb-2">{{$listing->title}} </h3>
                 <div class="text-xl font-bold mb-4">{{$listing->company}} </div>
                 <ul class="flex">
-                    <li class="bg-black text-white rounded-xl px-3 py-1 mr-2">
-                        <a href="#">Laravel</a>
+                @foreach($tags as $tag)
+                    <li class="flex items-center justify-center bg-black text-white rounded-xl py-1 px-3 mr-2 text-xs">
+                        <a href="/?tag={{$tag}}">{{$tag}} </a>
                     </li>
-                    <li class="bg-black text-white rounded-xl px-3 py-1 mr-2">
-                        <a href="#">API</a>
-                    </li>
-                    <li class="bg-black text-white rounded-xl px-3 py-1 mr-2">
-                        <a href="#">Backend</a>
-                    </li>
-                    <li class="bg-black text-white rounded-xl px-3 py-1 mr-2">
-                        <a href="#">Vue</a>
-                    </li>
+                @endforeach
                 </ul>
                 <div class="text-lg my-4">
                     <i class="fa-solid fa-location-dot"></i>
