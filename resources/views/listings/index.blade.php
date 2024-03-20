@@ -10,7 +10,7 @@
         @else
         <p>no listings found</p>
         @endunless
-        <div class="mt-6 p-4">
+        <div class="mt-6 p-4 col-span-full">
             {{$listings->links()}}
         </div>
     </div>
