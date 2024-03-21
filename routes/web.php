@@ -22,6 +22,14 @@ Route::get('/listings/create',[ListingController::class,'create']);
 
 Route::post('/listings',[ListingController::class, 'store']);
 
+Route::get('/listings/{listing}/edit',[ListingController::class,'edit']);
+
+Route::put('/listings/{listing}',[ListingController::class,'update']);
+
+Route::delete('/listings/{listing}',[ListingController::class,'destroy']);
+
+
+
 Route::get('/listings/{listing}',[ListingController::class,'show']);
 // Route::get('/hello', function(){
 //     return response('hello',200)
@@ -30,7 +38,8 @@ Route::get('/listings/{listing}',[ListingController::class,'show']);
 // });
 // Route::get('/post/{id}',function($id){
 //     ddd($id);
-//     return response('post'. $id);
+//     return response('post'. $id); 
+
 // })->where( 'id' ,'[0-9]+');
 // Route::get('/search',function(Request $request){
 //     dd($request);
