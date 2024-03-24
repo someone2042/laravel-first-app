@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Models\User;
+use PharIo\Manifest\Email;
 
 class UserController extends Controller
 {
@@ -31,5 +32,19 @@ class UserController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect('/')->with('message', "You have successfully logged out!");
+    }
+    public function login(){
+        return view("users.login");
+    }
+    public function authenticate(Request $request){
+        $formFields=$request->validate([
+            'email'=>['required','email'],
+            'password'=> 'required'
+            ]);
+        if(auth()->attempt($formFields)){
+            $request->session()->regenerate();
+            return redirect('/')->with('message','you are logged in!');
+        }
+        return back()->withErrors(['email'=> 'Inavild  email or password']);
     }
 }
