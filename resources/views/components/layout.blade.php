@@ -45,7 +45,7 @@
                     </li>
                     <li>
                         <form class="inline" method="POST" action="/logout">
-                            @csrf
+                            <input type="hidden" name="_token" value='{{csrf_token()}}'>
                             <button type="submit">
                                 <i class="fa-solid fa-door-closed"></i>
                                 logout
