@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GeminiController;
 use App\Models\Listing;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Route;
@@ -40,6 +41,10 @@ Route::post('/logout', [UserController::class, 'logout'])->middleware('auth');
 Route::get('/login', [UserController::class, 'login'])->name('login')->middleware('guest');
 
 Route::post('/users/authenticate', [UserController::class, 'authenticate']);
+
+Route::GET('/ai', [GeminiController::class, 'index'])->middleware('auth');
+
+Route::post('/ai', [GeminiController::class, 'send'])->middleware('auth');
 
 
 
