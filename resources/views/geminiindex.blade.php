@@ -107,7 +107,8 @@
             <div id="chat-messages"
                 class="flex-grow text-sm p-4 md:p-6 space-y-4 overflow-y-auto bg-gray-50 custom-scrollbar">
                 <!-- Example Messages -->
-                <div class="flex message">
+                <div class="message hidden"></div>
+                {{-- <div class="flex message">
                     <div class="bg-gray-200 text-gray-800 py-2 px-4 rounded-xl rounded-bl-lg max-w-[75%]">
                         <span class="chattext">Hello! How can I help you today?</span>
                     </div>
@@ -134,7 +135,7 @@
                             dolor itaque minus? Optio eum suscipit reiciendis, officia atque repudiandae aut ea
                             molestiae delectus nam, doloribus expedita?</span>
                     </div>
-                </div>
+                </div> --}}
                 <!-- More messages will be added here -->
             </div>
 
@@ -154,7 +155,9 @@
 
     <!-- Add your JavaScript file here for functionality -->
     <!-- <script src="script.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/showdown@2.1.0/dist/showdown.min.js"></script>
     <script>
+        var converter = new showdown.Converter()
         // Basic auto-resize for textarea (optional)
         const textarea = document.getElementById('user-input');
         textarea.addEventListener('input', () => {
@@ -179,7 +182,7 @@
     <script>
         $("#send-button").click(function(event) {
             let val = $('#user-input').val();
-            let valHTML = `<div class="flex justify-end message">
+            let valHTML = `<div class="flex justify-end message thing">
                     <div class="bg-blue-500 text-white py-2 px-4 rounded-xl rounded-br-lg max-w-[75%]">
                         <span class="chattext">` + val + `</span>
                     </div>
@@ -188,7 +191,7 @@
             $(".message").last().after(valHTML);
             $('#user-input').val('');
             let texts = [];
-            $(".message").each(function() {
+            $(".thing").each(function() {
                 texts.push($(this).text());
             });
             console.log(texts);
@@ -201,6 +204,19 @@
                 }
             }).done(function(res) {
                 console.log(res);
+                let text = converter.makeHtml(res.responseData);
+                let html = `
+                <div class="flex message thing">
+                    <div class="bg-gray-200 text-gray-800 py-2 px-4 rounded-xl rounded-bl-lg max-w-[75%]">
+                        <span class="chattext">` + text + `</span>
+                    </div>
+                </div>`
+                $(".message").last().after(html);
+                const elements = document.querySelectorAll(".message");
+                const lastElement = elements[elements.length - 1];
+                lastElement.scrollIntoView();
+                hljs.highlightAll();
+
             });
         })
     </script>
