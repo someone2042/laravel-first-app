@@ -215,7 +215,7 @@
                 const elements = document.querySelectorAll(".message");
                 const lastElement = elements[elements.length - 1];
                 lastElement.scrollIntoView();
-                hljs.highlightAll();
+                // hljs.highlightAll();
 
             });
         })
